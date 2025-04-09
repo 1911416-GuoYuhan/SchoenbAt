@@ -25,12 +25,6 @@ def polyinterp(points, x_min_bound=None, x_max_bound=None, plot=False):
     based on function and derivative information. Defaults to bisection if no critical
     points are valid.
 
-    Based on polyinterp.m Matlab function in minFunc by Mark Schmidt with some slight
-    modifications.
-
-    Implemented by: Hao-Jun Michael Shi and Dheevatsa Mudigere
-    Last edited 12/6/18.
-
     Inputs:
         points (nparray): two-dimensional array with each point of form [x f g]
         x_min_bound (float): minimum value that brackets minimum (default: minimum of points)
@@ -158,9 +152,6 @@ class LBFGS(Optimizer):
     L-BFGS implementations and (stochastic) Powell damping. Partly based on the 
     original L-BFGS implementation in PyTorch, Mark Schmidt's minFunc MATLAB code, 
     and Michael Overton's weak Wolfe line search MATLAB code.
-
-    Implemented by: Hao-Jun Michael Shi and Dheevatsa Mudigere
-    Last edited 12/6/18.
 
     Warnings:
       . Does not support per-parameter options and parameter groups.
@@ -983,9 +974,6 @@ class FullBatchLBFGS(LBFGS):
     Powell damping. Can be used when evaluating a deterministic function and
     gradient. Wraps the LBFGS optimizer. Performs the two-loop recursion,
     updating, and curvature updating in a single step.
-
-    Implemented by: Hao-Jun Michael Shi and Dheevatsa Mudigere
-    Last edited 11/15/18.
 
     Warnings:
       . Does not support per-parameter options and parameter groups.

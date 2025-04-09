@@ -23,5 +23,6 @@ class PostSBN(nn.Module):
 
     def forward(self, x):
         out = self.gamma * x
-        out = torch.pow(out,self.beta)
+        # optional
+        # out = torch.pow(out,self.beta)
         return out

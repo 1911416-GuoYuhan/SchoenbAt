@@ -73,7 +73,6 @@ def step_LRA(model, optimizer, lr_scheduler, ds_iter,amp_scaler,
 
             amp_scaler.scale(partial_outputs["loss"]).backward() # loss.backward()
 
-        # https://pytorch.org/tutorials/recipes/recipes/amp_recipe.html
         amp_scaler.unscale_(optimizer)
 
         nn.utils.clip_grad_value_(model.parameters(), clip_value=1) # Gradient Clipping
