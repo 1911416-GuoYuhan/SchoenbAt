@@ -28,24 +28,52 @@ Note: Specific requirements for data preprocessing are not included here.
 
 Processed dataset can be downloaded [here](https://drive.google.com/drive/folders/1rE0SjpeFKPFtgmWWjYCoIMz91UozHWWC?usp=sharing) from Skyformer[1].
 
-Note: most source code comes from [LRA repo](https://github.com/google-research/long-range-arena)[2].
+Note: most source code comes from [LRA repo](https://github.com/google-research/long-range-arena)[2], and Random Maclaurin Feature is implemented based on [dp-rfs](https://github.com/joneswack/dp-rfs)[3]
 
 ## Usage
 
-Modify the configuration in `config.py` and run
+We provide a multi-head attention version of **SchoenbAt** for use in Transformers. To instantiate the `SchoenbAt` class, the following parameters are required:
+
+- `dim`:  
+  The total feature dimension.
+
+- `head_dim`:  
+  The feature dimension for each attention head.
+
+- `num_head`:  
+  The number of attention heads.
+
+- `dropout`:  
+  Dropout rate used in the attention mechanism.
+
+- `rmfa_config`:  
+  Configuration dictionary for RMFA (Random Maclaurin Feature Attention), which includes:
+  
+  - `nb_features`:  
+    The dimensionality of the random projection.
+  
+  - `dotf`:  
+    The type of dot-product kernel function. Optional choices include:  
+    `'exp'`, `'inverse'`, `'logi'`, `'trigh'`, `'sqrt'`.
+
+Example usage:
+```python
+schoenbat = SchoenbAt(
+    dim=512,
+    head_dim=64,
+    num_head=8,
+    dropout=0.1,
+    rmfa_config={
+        'nb_features': 256,
+        'dotf': 'exp'
+    }
+)
 ```
-python main.py --mode train --attn rmfa --task lra-text --device cuda:0 --former maclauformer --dotf exp --save True
-```
-for trying SchoenbAt approximating Softmax attention.
-- mode: `train`, `eval`
-- attn: `softmax`, `kernelized`, `rmfa`
-- former: `maclauformer` which is with ppSBN, `transformer` which is without ppSBN
-- dotf: `exp`, `inverse`, `log`, `trigh`, `sqrt` means different dot-product kernels
-- task: `lra-text`, `lra-listops`, `lra-retrieval` 
-- save: `True`, `False` deciding whether save the model after training 
 
 **References**
 
 [1] Yifan Chen, Qi Zeng, Heng Ji, and Yun Yang. Skyformer: Remodel self-attention with gaussian kernel and Nystrom method. In NeurIPS 34, 2021.
 
 [2] Yi Tay, Mostafa Dehghani, Samira Abnar, Yikang Shen, Dara Bahri, Philip Pham, Jinfeng Rao, Liu Yang, Sebastian Ruder, and Don Metzler. Long range arena : A benchmark for efficient transformers. In ICLR, 2021.
+
+[3] Wacker, Jonas and Filippone, Maurizio. Local random feature approximations of the Gaussian kernel. Procedia Computer Science, 2022, 207: 987-996.

@@ -26,7 +26,7 @@ class Maclaurin_Coefs():
         self.functions = {
             'exp': exp(self.x),
             'inverse': 1/(1-self.x),
-            'log': 1-log(1-self.x),
+            'logi': 1-log(1-self.x),
             'trigh': cosh(self.x) + sinh(self.x),
             'sqrt': 2-sqrt(1-self.x)
         }

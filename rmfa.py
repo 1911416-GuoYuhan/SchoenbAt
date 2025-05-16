@@ -1,12 +1,11 @@
 import torch
 import torch.nn as nn
 
-from models.rf_util.measures import P_Measure, Exponential_Measure
-from models.rf_util.coeffients import Maclaurin_Coefs
+from rf_util.measures import P_Measure
+from rf_util.coeffients import Maclaurin_Coefs
+from random_features.maclaurin import Maclaurin
 
-from models.random_features.maclaurin import Maclaurin
-
-def rmfa(q, k, v, eps = 1.0):
+def rfa(q, k, v, eps = 1.0):
     """
     Args:
         q: [batch_size, head, length, proj_dim]
@@ -25,10 +24,10 @@ def rmfa(q, k, v, eps = 1.0):
     return attn
 
 class RMFA(nn.Module):
-    def __init__(self, config, device='cuda:0', max_val=20):
+    def __init__(self, head_dim, dropout, config, device='cuda:0', max_val=20):
         super().__init__()
-        self.drop_attn = torch.nn.Dropout(p = config["attention_dropout"])
-        self.head_dim = config["head_dim"]
+        self.drop_attn = torch.nn.Dropout(p = dropout)
+        self.head_dim = head_dim
         self.nb_features = config["nb_features"] if "nb_features" in config else 128
         self.dotf = config["dotf"]
         self.device = device
@@ -54,4 +53,4 @@ class RMFA(nn.Module):
         if mask is not None:
             projection_k = projection_k.masked_fill(mask[:, None, :, None] == 0, 0)
 
-        return rmfa(projection_q,projection_k,V)
+        return rfa(projection_q,projection_k,V)
