@@ -68,6 +68,7 @@ schoenbat = SchoenbAt(
         'dotf': 'exp'
     }
 )
+output = schoenbat(Q, K, V, mask)
 ```
 
 **References**
