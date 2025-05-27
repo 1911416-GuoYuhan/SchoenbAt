@@ -1,6 +1,7 @@
 # SchoenbAt
 
 *SchoenbAt* is a method for approximating dot-product kernelized attention under Schoenberg's theorem. It can act as a drop-in replacement for dot-product kernelized attention (e.g., exp(x·y) for Softmax attention) in any model architecture. This repository provides the official implementation of SchoenbAt and its application to Transformers.
+If you use our code, please cite the paper "Guo Y, Ding L, Yang Y, et al. SchoenbAt: Rethinking Attention with Polynomial basis[J]. arXiv preprint arXiv:2505.12252, 2025.".
 
 ## Installation
 
