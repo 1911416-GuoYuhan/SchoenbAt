@@ -29,7 +29,7 @@ Note: Specific requirements for data preprocessing are not included here.
 
 Processed dataset can be downloaded [here](https://drive.google.com/drive/folders/1rE0SjpeFKPFtgmWWjYCoIMz91UozHWWC?usp=sharing) from Skyformer[1].
 
-Note: most source code comes from [LRA repo](https://github.com/google-research/long-range-arena)[2], and Random Maclaurin Feature is implemented based on [dp-rfs](https://github.com/joneswack/dp-rfs)[3]
+Note: you can repeat our experiment from [LRA repo](https://github.com/google-research/long-range-arena)[2], and Random Maclaurin Feature is implemented based on [dp-rfs](https://github.com/joneswack/dp-rfs)[3]
 
 ## Usage
 
